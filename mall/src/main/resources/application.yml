@@ -1,0 +1,113 @@
+server:
+  address: 0.0.0.0
+  port: 8082
+  servlet:
+    context-path: /mall
+spring:
+  resources:
+    static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/, classpath:/templates/
+  application:
+    name: mall
+  # 配置访问密码
+  security:
+    user:
+      #服务端点访问账号
+      name: admin
+      #服务端点访问密码
+      password: easyForCode.com
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    timeout: 3s
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      maxActive: 50
+      initialSize: 2
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: false
+      maxOpenPreparedStatements: 20
+      ########### 启用内置过滤器（第一个 stat必须，否则监控不到SQL）##########
+      filters: stat,wall,log4j2
+      # 自己配置监控统计拦截的filter
+      filter:
+        # 开启druiddatasource的状态监控
+        stat:
+          enabled: true
+          db-type: mysql
+          # 开启慢sql监控，超过1s 就认为是慢sql，记录到日志中
+          log-slow-sql: true
+          slow-sql-millis: 1000
+        # 日志监控，使用slf4j 进行日志输出
+        slf4j:
+          enabled: true
+          statement-log-error-enabled: true
+          statement-create-after-log-enabled: false
+          statement-close-after-log-enabled: false
+          result-set-open-after-log-enabled: false
+          result-set-close-after-log-enabled: false
+      ########## 配置WebStatFilter，用于采集web关联监控的数据 ##########
+      web-stat-filter:
+        enabled: true                   # 启动 StatFilter
+        url-pattern: /*                 # 过滤所有url
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" # 排除一些不必要的url
+        session-stat-enable: true       # 开启session统计功能
+        session-stat-max-count: 1000    # session的最大个数,默认100
+      ########## 配置StatViewServlet（监控页面），用于展示Druid的统计信息 ##########
+      stat-view-servlet:
+        enabled: true                   # 启用StatViewServlet
+        url-pattern: /druid/*           # 访问内置监控页面的路径，内置监控页面的首页是/druid/index.html
+        reset-enable: false              # 不允许清空统计数据,重新计算
+        login-username: root            # 配置监控页面访问密码
+        login-password: 123456
+        deny:
+
+# Feign
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
+  hystrix:
+    enabled: false
+
+# Sa-Token配置
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: Authorization
+  token-style: tik
+  # token有效期 设为一天 (必定过期) 单位: 秒
+  timeout: 36000
+  # token临时有效期 (指定时间无操作就过期) 单位: 秒
+  activity-timeout: 7200
+  # 开启内网服务调用鉴权
+  check-id-token: true
+  # Id-Token的有效期 (单位: 秒)
+  id-token-timeout: 1800
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: false
+  # 是否尝试从header里读取token
+  is-read-head: true
+  # 是否尝试从cookie里读取token
+  is-read-cookie: false
+  # token前缀
+  token-prefix: "Bearer"
+  # jwt秘钥
+  jwt-secret-key: abcdefghijklmnopqrstuvwxyz
+  # 是否输出操作日志
+  is-log: true
+  #否打开自动续签
+  auto-renew: true
+
+

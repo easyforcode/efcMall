@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mall.pojo.TestTable">
+
+    <!-- 新增 -->
+    <insert id="insert" parameterType="com.mall.pojo.TestTable" useGeneratedKeys="true" keyProperty="id" >
+		insert into test_table (id,test_one)
+		values (#{id},#{testOne})
+	</insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="com.mall.pojo.TestTable">
+		update test_table set test_one=#{testOne} where id=#{id}
+	</update>
+
+    <!-- 查询所有数据 -->
+    <select id="selectAll" resultType="com.mall.pojo.TestTable">
+		select * from test_table
+	</select>
+
+
+</mapper>

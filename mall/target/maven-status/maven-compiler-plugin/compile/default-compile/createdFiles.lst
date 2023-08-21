@@ -1,0 +1,3 @@
+com/mall/Run.class
+com/mall/global/datasource/MasterDatasourceConfiguration.class
+com/mall/global/datasource/SlaveDatasourceConfiguration.class
