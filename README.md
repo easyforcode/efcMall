@@ -27,3 +27,5 @@ npm install
 - 联系电话：<a href="tel: 18566298879" style="color: red;"> 18566298879 </a>
 - 联系微信：18566298879 / easyforcode  
 
+由于网络经常无法链接github，更新可能会稍微慢一些，最新更新请查阅：
+[![易为创码/efcMall小程序商城](https://gitee.com/easyforcode/efcMall/widgets/widget_card.svg?colors=eae9d7,2e2f29,272822,484a45,eae9d7,747571)](https://gitee.com/easyforcode/efcMall)
