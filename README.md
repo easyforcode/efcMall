@@ -26,4 +26,4 @@ npm install
 - 公司网址：<a href="https://www.easyforcode.com" style="color: green;">https://www.easyforcode.com</a>
 - 联系电话：<a href="tel: 18566298879" style="color: red;"> 18566298879 </a>
 - 联系微信：18566298879 / easyforcode  
-![输入图片说明](wx.jpg)
+
